@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strength & Weakness Analysis | Career Guidance</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 700px;
+      padding: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1d4ed8;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #1d4ed8;
+      color: #fff;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    #resultSection {
+      margin-top: 25px;
+      background: #f9fafb;
+      padding: 20px;
+      border-radius: 15px;
+    }
+
+    #resultSection h2 {
+      color: #16a34a;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 25px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      background: #ef4444;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .back-btn:hover {
+      background: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Strength & Weakness Analysis</h1>
+
+    <form id="analysisForm">
+      <div>
+        <label>1. Which subject do you enjoy the most?</label>
+        <select id="favSubject" required>
+          <option value="">-- Select --</option>
+          <option value="science">Science</option>
+          <option value="maths">Maths</option>
+          <option value="commerce">Commerce</option>
+          <option value="arts">Arts / Humanities</option>
+          <option value="technology">Computer / Technology</option>
+        </select>
+      </div>
+
+      <div>
+        <label>2. What kind of activities do you enjoy?</label>
+        <select id="activity" required>
+          <option value="">-- Select --</option>
+          <option value="creative">Creative tasks (drawing, writing, design)</option>
+          <option value="logical">Problem solving / logical reasoning</option>
+          <option value="people">Helping or interacting with people</option>
+          <option value="hands">Practical / hands-on tasks</option>
+        </select>
+      </div>
+
+      <div>
+        <label>3. How would you describe your personality?</label>
+        <select id="personality" required>
+          <option value="">-- Select --</option>
+          <option value="leader">Leader / Organizer</option>
+          <option value="thinker">Thinker / Analyst</option>
+          <option value="creator">Creator / Innovator</option>
+          <option value="helper">Supportive / Empathetic</option>
+        </select>
+      </div>
+
+      <button type="submit">Analyze Me</button>
+    </form>
+
+    <div id="resultSection" style="display: none;">
+      <h2>🎓 Your Analysis Result</h2>
+      <p id="strengthResult"></p>
+      <p id="weaknessResult"></p>
+      <h3>Suggested Career Paths:</h3>
+      <ul id="careerSuggestions"></ul>
+      <h3>Recommended Higher Study Courses:</h3>
+      <ul id="courseSuggestions"></ul>
+    </div>
+
+    <a href="index.html" class="back-btn">⬅ Back to Home</a>
+  </div>
+
+  <script src="strengthweakness.js"></script>
+</body>
+</html>

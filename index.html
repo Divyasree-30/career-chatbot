@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Guidance Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #4a90e2;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #357ABD; }
+    .switch-link {
+      text-align: center;
+      margin-top: 10px;
+      color: #555;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .error, .success {
+      text-align: center;
+      margin-bottom: 15px;
+      display: none;
+    }
+    .error { color: red; }
+    .success { color: green; }
+
+    .home-content {
+      text-align: center;
+      display: none;
+    }
+    .section-btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background: #6a11cb;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .section-btn:hover { background: #3d0566; }
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .logout-btn:hover { background: #c0392b; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <button class="logout-btn" id="logoutBtn" style="display:none;">Logout</button>
+
+  <h2 id="formTitle">Login to Career Guidance Portal</h2>
+
+  <div class="error" id="errorMsg"></div>
+  <div class="success" id="successMsg"></div>
+
+  <form id="loginForm">
+    <div id="nameGroup" class="input-group" style="display:none;">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" />
+    </div>
+
+    <div id="ageGroup" class="input-group" style="display:none;">
+      <label for="age">Age</label>
+      <input type="number" id="age" />
+    </div>
+
+    <div id="interestGroup" class="input-group" style="display:none;">
+      <label for="interests">Your Interests</label>
+      <input type="text" id="interests" placeholder="e.g. Science, Art, Coding" />
+    </div>
+
+    <div id="strengthGroup" class="input-group" style="display:none;">
+      <label for="strengths">Your Strengths</label>
+      <input type="text" id="strengths" placeholder="e.g. Creativity, Logical Thinking" />
+    </div>
+
+    <div id="academicGroup" class="input-group" style="display:none;">
+      <label for="academics">Academic Performance (%)</label>
+      <input type="number" id="academics" />
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" required />
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" required />
+    </div>
+
+    <button type="submit" class="btn" id="submitBtn">Login</button>
+  </form>
+
+  <p class="switch-link" onclick="toggleForm()">Don't have an account? Signup here</p>
+
+  <div class="home-content" id="homePage">
+    <h2 id="greeting">Welcome!</h2>
+    <p id="careerMessage"></p>
+    <p>Start exploring personalized career options:</p>
+    <a href="chat.html" class="section-btn">🎯 Career Chatbot</a>
+    <a href="strengthweakness.html" class="section-btn">📚 Strength weakness analysis</a>
+    <a href="courses.html" class="section-btn">📘Courses</a>
+
+  </div>
+</div>
+
+<script>
+  const formTitle = document.getElementById("formTitle");
+  const loginForm = document.getElementById("loginForm");
+  const errorMsg = document.getElementById("errorMsg");
+  const successMsg = document.getElementById("successMsg");
+  const homePage = document.getElementById("homePage");
+  const greeting = document.getElementById("greeting");
+  const careerMessage = document.getElementById("careerMessage");
+  const toggleLink = document.querySelector(".switch-link");
+  const submitBtn = document.getElementById("submitBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  let isLogin = true;
+
+  function toggleForm() {
+    isLogin = !isLogin;
+    formTitle.textContent = isLogin ? "Login to Career Portal" : "Signup for Career Portal";
+    submitBtn.textContent = isLogin ? "Login" : "Signup";
+    toggleLink.textContent = isLogin ? "Don't have an account? Signup here" : "Already have an account? Login here";
+
+    document.getElementById("nameGroup").style.display = isLogin ? "none" : "block";
+    document.getElementById("ageGroup").style.display = isLogin ? "none" : "block";
+    document.getElementById("interestGroup").style.display = isLogin ? "none" : "block";
+    document.getElementById("strengthGroup").style.display = isLogin ? "none" : "block";
+    document.getElementById("academicGroup").style.display = isLogin ? "none" : "block";
+
+    errorMsg.style.display = "none";
+    successMsg.style.display = "none";
+  }
+
+  loginForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (isLogin) {
+      const storedEmail = localStorage.getItem("userEmail");
+      const storedPassword = localStorage.getItem("userPassword");
+      const studentName = localStorage.getItem("studentName");
+      const interests = localStorage.getItem("studentInterests");
+      const strengths = localStorage.getItem("studentStrengths");
+
+      if (email === storedEmail && password === storedPassword) {
+        showHome(studentName, interests, strengths);
+        localStorage.setItem("isLoggedIn", "true");
+      } else {
+        errorMsg.textContent = "❌ Invalid email or password";
+        errorMsg.style.display = "block";
+      }
+    } else {
+      const name = document.getElementById("name").value.trim();
+      const age = parseInt(document.getElementById("age").value);
+      const interests = document.getElementById("interests").value.trim();
+      const strengths = document.getElementById("strengths").value.trim();
+      const academics = parseInt(document.getElementById("academics").value);
+
+      if (!name || !age || !interests || !strengths || !academics || !email || !password) {
+        errorMsg.textContent = "❌ Please fill all fields";
+        errorMsg.style.display = "block";
+        return;
+      }
+
+      // Save details
+      localStorage.setItem("studentName", name);
+      localStorage.setItem("studentAge", age);
+      localStorage.setItem("studentInterests", interests);
+      localStorage.setItem("studentStrengths", strengths);
+      localStorage.setItem("studentAcademics", academics);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userPassword", password);
+      localStorage.setItem("isLoggedIn", "false");
+
+      successMsg.textContent = "✅ Signup successful! Now login.";
+      successMsg.style.display = "block";
+      toggleForm();
+    }
+  });
+
+  function showHome(name, interests, strengths) {
+    greeting.innerText = `Welcome, ${name}!`;
+    careerMessage.innerText = `Based on your interests (${interests}) and strengths (${strengths}), we’ll help you explore the best career paths.`;
+    loginForm.style.display = "none";
+    toggleLink.style.display = "none";
+    formTitle.style.display = "none";
+    homePage.style.display = "block";
+    logoutBtn.style.display = "inline-block";
+  }
+
+  logoutBtn.addEventListener("click", () => {
+    localStorage.setItem("isLoggedIn", "false");
+    location.reload();
+  });
+
+  // Resume session
+  window.onload = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const name = localStorage.getItem("studentName");
+    const interests = localStorage.getItem("studentInterests");
+    const strengths = localStorage.getItem("studentStrengths");
+    if (isLoggedIn === "true") showHome(name, interests, strengths);
+  };
+</script>
+
+</body>
+</html>
